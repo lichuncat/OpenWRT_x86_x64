@@ -76,6 +76,13 @@ jobs:
         ./scripts/feeds update -a
         ./scripts/feeds install -a
         
+    - name: Setup Go 1.24.x for MosDNS
+      run: |
+        cd openwrt
+        rm -rf feeds/packages/lang/golang
+        git clone https://github.com/sbwml/packages_lang_golang -b 24.x feeds/packages/lang/golang
+        echo "Go 1.24.x setup complete for MosDNS v5"
+        
     - name: Load feeds.conf.default
       run: |
         chmod +x $OPENWRT_NAME/*.sh
